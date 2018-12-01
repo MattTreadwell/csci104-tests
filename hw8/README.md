@@ -1,12 +1,12 @@
 # Trie Tests
 
-These are basic tests for testing the only the Trie. 
+These are basic tests for testing only the Trie. 
 
 Note: valgrind is not enabled automatically
 
 ## Running (recommended)
 
-I recommend using CLion to run these tests, which simplifies running them with valgrind.
+It's recommended to use CLion to run these tests, which will simplify running them with valgrind.
 
 ## Running (from terminal, no valgrind)
 

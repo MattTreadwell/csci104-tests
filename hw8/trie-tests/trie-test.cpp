@@ -8,7 +8,7 @@
 #include "gtest/gtest.h"
 #include "Trie.h"
 
-// Mainly meant to be tested for memory leaks with valgrind
+// Mainly meant to test for memory leaks with valgrind
 // Not much assertion checking
 class TrieSimple : public ::testing::Test {
 protected:
@@ -114,4 +114,22 @@ TEST_F(TrieHard, ReUseDeleted) {
     EXPECT_TRUE(trie->prefix("hello") == nullptr);
     checkInsert("hello");
     EXPECT_TRUE(trie->prefix("hel") != nullptr);
+}
+
+TEST_F(TrieHard, booleans) {
+    checkInsert("bob");
+    EXPECT_TRUE(trie->prefix("bob")->inSet);
+    EXPECT_TRUE(!trie->prefix("bo")->inSet);
+    EXPECT_TRUE(!trie->prefix("b")->inSet);
+    checkInsert("bobjim");
+    EXPECT_TRUE(trie->prefix("bobjim")->inSet);
+    EXPECT_TRUE(!trie->prefix("bobji")->inSet);
+    EXPECT_TRUE(!trie->prefix("bobj")->inSet);
+    trie->remove("bob");
+    EXPECT_TRUE(!trie->prefix("bob")->inSet);
+}
+
+TEST_F(TrieHard, mixedCase) {
+    checkInsert("bOBjIm");
+    EXPECT_TRUE(trie->prefix("BobJIm") != nullptr);
 }
